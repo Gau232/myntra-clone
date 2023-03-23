@@ -15,14 +15,14 @@ const NavBar = () => {
           <div className="nav-category">
             <span>MEN</span>
             <span>WOMEN</span>
-            <span>KID</span>
+            <span>KIDS</span>
           </div>
           <div>
             <input type="text" placeholder="Search your product here" />
           </div>
-          <div className="cart-icon">
+          <div className="cart-holder">
             <FaShoppingCart />
-            <div className="cart-count">0</div>
+            <div className="cart-list-length">0</div>
           </div>
         </div>
       </div>

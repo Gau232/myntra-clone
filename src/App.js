@@ -6,8 +6,10 @@ import MainContent from "./components/MainContent/MainContent";
 
 const App = () => {
   return (
-    <div className="app">
-      <NavBar />
+    <>
+      <div className="app">
+        <NavBar />
+      </div>
       <div className="midSection">
         <SideBar />
         <div className="contentSection">
@@ -15,7 +17,7 @@ const App = () => {
           <MainContent />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

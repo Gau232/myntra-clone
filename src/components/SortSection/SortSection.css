@@ -1,7 +1,13 @@
-.sortSection {
+.sort-holder {
     width: 100%;
     height: 8vh;
     border: 2px solid black;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+select {
+    margin-left: 8px;
 }

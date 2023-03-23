@@ -13,8 +13,8 @@
 }
 
 .icon-holder {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 20px;
+    margin-right: 40px;
     height: 100%;
     width: 10vw;
     padding: 10px;
@@ -58,7 +58,7 @@ img {
 }
 
 input {
-    width: 200px;
+    width: 200px !important;
     height: 25px;
     border-radius: 4px;
     padding: 0 5px 0 5px;
@@ -66,12 +66,12 @@ input {
     outline: none;
 }
 
-.cart-icon {
+.cart-holder {
     scale: 1.8;
     position: relative;
 }
 
-.cart-count {
+.cart-list-length {
     width: 9px;
     height: 8px;
     position: absolute;
