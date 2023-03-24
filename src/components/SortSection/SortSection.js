@@ -2,9 +2,9 @@ import "./SortSection.css";
 
 const SortSection = () => {
   return (
-    <div className="sort-holder">
+    <div className="sortSection-sort-holder">
       Sort by:
-      <select>
+      <select className="sortSection-dropdown">
         <option value="whatsNew">What's New</option>
         <option value="priceLowToCHigh">Price low to high</option>
         <option value="betterDiscount">Better Discount</option>

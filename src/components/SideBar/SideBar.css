@@ -1,0 +1,34 @@
+.sideBar-filter-holder {
+    position: fixed;
+    left: 15px;
+    top: 120px;
+    /* min-width: 30%; */
+    width: 240px;
+    height: 100%;
+    border: 2px solid black;
+    margin-top: 10px;
+    margin-right: 1%;
+    padding: 4px;
+}
+
+.sideBar-filter-container{
+    border: 2px solid black;
+    margin-bottom: 10px;
+    padding: 4px;
+}
+
+.sideBar-button-holder {
+    display: flex;
+    flex-direction: column;
+}
+
+.sideBar-filters {
+    display: flex;
+    gap:5px;
+    /* margin-left: 15px; */
+    margin: 5px 0 0 15px;
+}
+
+.sideBar-heading {
+    font-weight: 600;
+}

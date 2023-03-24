@@ -6,18 +6,16 @@ import MainContent from "./components/MainContent/MainContent";
 
 const App = () => {
   return (
-    <>
-      <div className="app">
-        <NavBar />
-      </div>
-      <div className="midSection">
+    <div className="app-main">
+      <NavBar />
+      <div className="app-midSection">
         <SideBar />
-        <div className="contentSection">
+        <div className="app-contentSection">
           <SortSection />
           <MainContent />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

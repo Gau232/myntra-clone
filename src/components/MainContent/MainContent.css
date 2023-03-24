@@ -1,8 +1,14 @@
-.mainContent {
+.mainContent-container {
     border: 2px solid black;
-    width: 100%;
+    margin-top: 50px;
+    /* width: 100%; */
+    margin-left: 260px;
+    /* margin: auto; */
     height: 100%;
     display: flex;
+    align-items: flex-end;
     flex-wrap: wrap;
-    gap: 15px;
+    column-gap: 70px;
+    row-gap: 40px;
+    padding: 15px;
 }

@@ -1,13 +1,17 @@
-.sort-holder {
-    width: 100%;
+.sortSection-sort-holder {
+    position: fixed;
+    top: 75px;
     height: 8vh;
     border: 2px solid black;
     width: 100%;
+    margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: blanchedalmond;
+    z-index: 999;
 }
 
-select {
+.sortSection-dropdown {
     margin-left: 8px;
 }
