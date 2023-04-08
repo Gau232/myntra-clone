@@ -1,0 +1,36 @@
+.Footer-container {
+    /* position: absolute; */
+    /* bottom: -128px; */
+    bottom: 0;
+    background-color: rgb(231, 231, 231);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items:flex-start;
+    padding: 10px 50px;
+    transition: 0.2s;
+}
+
+/* .Footer-container:hover {
+    bottom: 0;
+    transition: 0.2s;
+} */
+
+.Footer-individualSections{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.Footer-individualSections h3{ 
+    margin-bottom: 3px;
+    font-size: 13px;
+}
+.Footer-individualSections a {
+    text-decoration: none;
+    color: rgb(68, 68, 68);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

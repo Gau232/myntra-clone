@@ -1,21 +1,43 @@
-import Styles from "./App.css";
-import NavBar from "./components/NavBar/NavBar";
-import SideBar from "./components/SideBar/SideBar";
-import SortSection from "./components/SortSection/SortSection";
-import MainContent from "./components/MainContent/MainContent";
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import ApiContextProvider from "./context/ApiContextProvider";
+import HomePage from "./components/Pages/HomePage/HomePage";
+import ProductCatalogPage from "./components/Pages/ProductCatalogPage/ProductCatalogPage";
+import ProductPage from "./components/Pages/ProductPage/ProductPage";
+import ShoppingCartPage from "./components/Pages/ShoppingCartPage/ShoppingCartPage";
+import PaymentModalPage from "./components/Pages/PaymentModalPage/PaymentModalPage";
+
+const routes = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/catalog",
+    element: <ProductCatalogPage />,
+  },
+  {
+    path: "/product",
+    element: <ProductPage />,
+  },
+  {
+    path: "/cart",
+    element: <ShoppingCartPage />,
+  },
+  {
+    path: "/payment",
+    element: <PaymentModalPage />,
+  },
+]);
 
 const App = () => {
   return (
-    <div className="app-main">
-      <NavBar />
-      <div className="app-midSection">
-        <SideBar />
-        <div className="app-contentSection">
-          <SortSection />
-          <MainContent />
-        </div>
+    <ApiContextProvider>
+      <div className="app-main">
+        <RouterProvider router={routes} />
       </div>
-    </div>
+    </ApiContextProvider>
   );
 };
 

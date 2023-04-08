@@ -2,12 +2,17 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Assistant,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 }
 
 .app-main {
-    /* margin: 0px 15px 0 15px; */
-    display: flex;
-    flex-direction: column;
+    /* width: 10%; */
+    /* height: 10%; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* gap: 50px; */
+    /* background-color: aqua; */
+    /* padding-top: 200px; */
 }
 
 .app-midSection {

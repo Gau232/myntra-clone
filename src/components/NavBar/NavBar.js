@@ -1,33 +1,63 @@
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/Myntra_Logo_nobg.png";
-import { FaShoppingCart } from "react-icons/fa";
+import {
+  HiOutlineSearch,
+  HiOutlineUser,
+  HiOutlineHeart,
+  HiOutlineShoppingBag,
+} from "react-icons/hi";
 
 const NavBar = () => {
   return (
     <>
-      <div className="navBar-nav-container">
-        <div className="navBar-logo-holder">
-          <a href="/">
-            <img className="navBar-logo" src={logo} alt="myntra logo" />
-          </a>
-        </div>
-        <div className="navBar-middleSection">
-          <div className="navBar-nav-category">
-            <span>MEN</span>
-            <span>WOMEN</span>
-            <span>KIDS</span>
+      <div className="navBar-backSpace"></div>
+      <div className="navBar-container">
+        <div className="navBar-leftSection">
+          <div className="navBar-logoHolder">
+            <Link to={"/"}>
+              <img className="navBar-logo" src={logo} alt="myntra logo" />
+            </Link>
           </div>
-          <div>
+          <div className="navBar-categorySection">
+            <Link to={"/Catalog"} className="navBar-cat">
+              MEN
+            </Link>
+            <Link to={"/Catalog"} className="navBar-cat">
+              WOMEN
+            </Link>
+            <Link to={"/Catalog"} className="navBar-cat">
+              KIDS
+            </Link>
+            <span className="navBar-cat">HOME & LIVING</span>
+            <span className="navBar-cat">BEAUTY</span>
+            <span className="navBar-cat navBar-catStudio">
+              STUDIO <div className="navBar-catNew">NEW</div>
+            </span>
+          </div>
+        </div>
+        <div className="navBar-rightSection">
+          <div className="NavBar-searchBar">
+            <HiOutlineSearch className="navBar-searchIcon" />
             <input
               className="navBar-search"
               type="text"
-              placeholder="Search your product here"
+              placeholder="Search for products, brands and more"
             />
           </div>
-          <div className="navBar-cart-holder">
-            <FaShoppingCart />
-            <div className="navBar-cart-list-length">0</div>
-          </div>
+          <a className="navBar-iconContainer">
+            <HiOutlineUser className="navBar-icon" />
+            <div>Profile</div>
+          </a>
+          <a className="navBar-iconContainer">
+            <HiOutlineHeart className="navBar-icon" />
+            <div>Wishlist</div>
+          </a>
+          <a href="/cart" className="navBar-iconContainer navBar-cartIcon">
+            <HiOutlineShoppingBag className="navBar-icon" />
+            <span className="navBar-cart-list-length">0</span>
+            <div>Bag</div>
+          </a>
         </div>
       </div>
     </>
