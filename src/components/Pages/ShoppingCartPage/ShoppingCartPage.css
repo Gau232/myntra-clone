@@ -1,4 +1,8 @@
 /* navbar */
+*{
+    user-select: none;
+}
+
 #ShoppingCartPage {
     position: relative;
 }
@@ -120,6 +124,8 @@
     align-items: flex-start;
     flex-direction: column;
     margin-top: 18px;
+    overflow: hidden;
+    
 }
 
 .ShoppingCartPage-tableDesc h3 {
@@ -152,6 +158,12 @@
     cursor: pointer;
 }
 
+.ShoppingCartPage-addBox2:hover {
+    border: 1px solid #acacac;
+    background-color: #acacac;
+    color: white;
+}
+
 .ShoppingCartPage-addBoxDelete {
     border: 1px solid #eaeaec;
     width: 40px;
@@ -166,10 +178,12 @@
 .ShoppingCartPage-addBoxDelete:hover {
     border: 1px solid #eaeaec;
     background-color: #ff3e6c;
+    color: white;
 }
 
 .ShoppingCartPage-listPrice{
     font-weight: 500;
+    width: 10%;
 }
 
 /* price section */

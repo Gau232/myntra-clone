@@ -2,7 +2,7 @@ import "./Card.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const Card = (prop) => {
+const Card = (props) => {
   let productDetails = {
     id: "M1",
     category: "Mens",
@@ -26,7 +26,9 @@ const Card = (prop) => {
     rating_count: 13.8,
   };
 
-  productDetails = prop ? productDetails : prop;
+// console.log(`props`,props.data);
+  productDetails = (props.data === undefined) ? productDetails : props.data;
+// console.log(`productDetails`,productDetails);
 
   return (
     <li className="product-base">
@@ -41,7 +43,7 @@ const Card = (prop) => {
         <AiOutlineHeart />
       </div>
       <Link
-        to={"/product"}
+        to={`/product/${productDetails.id}`}
         // data-refreshpage="true"
         // target="_blank"
         // href="/product"

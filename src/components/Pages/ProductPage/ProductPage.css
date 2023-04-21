@@ -143,7 +143,10 @@ opacity: 0.8;
 .productPage-sizeContainer {
     margin-top: 10px;
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
+    /* width: 100%; */
+
 }
 
 .productPage-sizes {
@@ -163,6 +166,11 @@ opacity: 0.8;
 
 .productPage-sizes:hover {
     border: 1px solid #ff0095;
+}
+
+.productPage-sizes-selected {
+    border: 1px solid #ff0095;
+    color: #ff0095;
 }
 
 /* buttons */

@@ -90,6 +90,14 @@ margin-bottom: 0.4rem;
     margin-top: 5px;
 }
 
+.catalog-list-group {
+    max-height: 200px;
+    overflow: auto;
+}
+
+.catalog-list-group::-webkit-scrollbar {
+    display: none;
+  }
 
 .catalog-list-group-item {
     display: flex;

@@ -9,6 +9,8 @@ import {
 } from "react-icons/hi";
 
 const NavBar = () => {
+
+  const cat = "women";
   return (
     <>
       <div className="navBar-backSpace"></div>
@@ -20,13 +22,13 @@ const NavBar = () => {
             </Link>
           </div>
           <div className="navBar-categorySection">
-            <Link to={"/Catalog"} className="navBar-cat">
+            <Link to={"/Catalog/men"} className="navBar-cat">
               MEN
             </Link>
-            <Link to={"/Catalog"} className="navBar-cat">
+            <Link to={"/Catalog/women"} className="navBar-cat">
               WOMEN
             </Link>
-            <Link to={"/Catalog"} className="navBar-cat">
+            <Link to={"/Catalog/kids"} className="navBar-cat">
               KIDS
             </Link>
             <span className="navBar-cat">HOME & LIVING</span>

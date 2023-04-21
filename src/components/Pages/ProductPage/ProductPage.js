@@ -2,8 +2,20 @@ import "./ProductPage.css";
 
 import NavBar from "../../NavBar/NavBar";
 import { HiOutlineHeart, HiOutlineShoppingBag } from "react-icons/hi";
+import { useParams } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import MyContext from "../../../context/MyContext";
 
-const ProductPage = (prop) => {
+const ProductPage = () => {
+  // const [myContextData, setMyContextData] = useState(MyContext);
+  const myContextData = useContext(MyContext);
+console.log(myContextData);
+
+  let inputDataMen = require("../../../assets/inputData/mens_data.json");
+  let inputDataWomen = require("../../../assets/inputData/womens_data.json");
+  let inputDataChildren = require("../../../assets/inputData/children_data.json");
+  let combinedData = [...inputDataMen, ...inputDataWomen, ...inputDataChildren];
+
   let productDetails = {
     id: "M1",
     category: "Mens",
@@ -27,58 +39,94 @@ const ProductPage = (prop) => {
     rating_count: 13.8,
   };
 
-  productDetails = prop ? productDetails : prop;
+  const params = useParams();
+  // console.log(params);
+  productDetails = combinedData.filter((item) => {
+    return item.id === params.id;
+  });
+  // console.log(productDetails);
+
+  // productDetails = prop ? productDetails : prop;
+
+  function ScrollToTopOnMount() {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
+    return null;
+  }
+
+  // selecting the sizes
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const handleClickSizeSelection = (index, size) => {
+    setSelectedItem(index);
+    setSelectedSize(size);
+  };
+  // console.log(selectedSize);
+
+  const handleAddToCart = () => {
+    if (selectedSize === null) {
+      alert("Please select a size");
+    } else {
+      let cartItem = myContextData.cartState.find(
+        (item) => item.id === productDetails[0].id
+      );
+      if (cartItem) {
+        console.log("found");
+        // console.log(cartItem);
+        if (cartItem.selected_size === selectedSize) {
+          alert(`Product in size ${selectedSize} already exist in cart`);
+        } else {
+          addProductToCart();
+        }
+      } else {
+        console.log("! found");
+        addProductToCart();
+      }
+    }
+  };
+
+  function addProductToCart () {
+    let currProductDetails = productDetails[0];
+    currProductDetails.quantity = 1;
+    currProductDetails.selected_size = selectedSize;
+    // console.log(currProductDetails);
+    // myContextData.cartState.push(currProductDetails);
+    // myContextData.updateCartContext(currProductDetails);
+    myContextData.setCartState([...myContextData.cartState, currProductDetails]);
+    // console.log(myContextData);
+  }
+  console.log(myContextData);
 
   return (
     <>
+      <ScrollToTopOnMount />
       <NavBar />
       <main id="productPage-main">
         <div id="productPage">
           <div className="productPage-imgsContainer">
-            <img
-              draggable="false"
-              src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-              className="productPage-images"
-              alt="category"
-            />
-            <img
-              draggable="false"
-              src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-              className="productPage-images"
-              alt="category"
-            />
-            <img
-              draggable="false"
-              src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-              className="productPage-images"
-              alt="category"
-            />
-            <img
-              draggable="false"
-              src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-              className="productPage-images"
-              alt="category"
-            />
-
-            {/* {productDetails.images.map((image) => {
-              <img
-                draggable="false"
-                src={image}
-                className="productPage-images"
-              />;
-            })} */}
+            {productDetails[0].images.slice(0, 4).map((image) => {
+              return (
+                <img
+                  draggable="false"
+                  src={image}
+                  className="productPage-images"
+                />
+              );
+            })}
           </div>
 
           <div className="productPage-itemDetailsSection">
             <div class="productPage-titleSection">
               <h1 class="productPage-title">
-                {productDetails.brand}
-                <h1 class="productPage-name">{productDetails.title}</h1>
+                {productDetails[0].brand}
+                <h1 class="productPage-name">{productDetails[0].title}</h1>
               </h1>
               <div class="productPage-rating">
                 <div>
-                  {productDetails.rating} ⭐{" "}
-                  <span> | {productDetails.rating_count}k Ratings</span>
+                  {productDetails[0].rating} ⭐{" "}
+                  <span> | {productDetails[0].rating_count}k Ratings</span>
                 </div>
               </div>
             </div>
@@ -86,13 +134,13 @@ const ProductPage = (prop) => {
             <div className="productPage-priceSection">
               <div className="productPage-allprice">
                 <span className="productPage-ourPrice">
-                  ₹{productDetails.discounted_price}
+                  ₹{productDetails[0].discounted_price}
                 </span>
                 <span className="productPage-strikePrice">
-                  MRP <span>₹{productDetails.strike_price}</span>
+                  MRP <span>₹{productDetails[0].strike_price}</span>
                 </span>
                 <span className="productPage-discount">
-                  {productDetails.discount}
+                  {productDetails[0].discount}
                 </span>
               </div>
               <div className="productPage-taxInclusive">
@@ -103,17 +151,29 @@ const ProductPage = (prop) => {
             <div className="productPage-sizeSection">
               <h1 className="productPage-sizeHeading">SELECT SIZE</h1>
               <div className="productPage-sizeContainer">
-                <span className="productPage-sizes">XS</span>
-                <span className="productPage-sizes">S</span>
-                <span className="productPage-sizes">M</span>
-                <span className="productPage-sizes">L</span>
-                <span className="productPage-sizes">XL</span>
-                <span className="productPage-sizes">XXL</span>
+                {productDetails[0].size.map((size, index) => {
+                  return (
+                    <span
+                      key={index}
+                      className={
+                        selectedItem === index
+                          ? "productPage-sizes productPage-sizes-selected"
+                          : "productPage-sizes"
+                      }
+                      onClick={() => handleClickSizeSelection(index, size)}
+                    >
+                      {size}
+                    </span>
+                  );
+                })}
               </div>
             </div>
 
             <div className="productPage-buyWishButtonSection">
-              <button className="productPage-buyButton">
+              <button
+                className="productPage-buyButton"
+                onClick={handleAddToCart}
+              >
                 <HiOutlineShoppingBag />
                 ADD TO BAG
               </button>

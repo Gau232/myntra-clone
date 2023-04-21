@@ -1,7 +1,119 @@
 import "./ShoppingCartPage.css";
 import NavBar from "../../NavBar/NavBar";
+import { useContext, useRef, useState } from "react";
+// import { MyContext } from "../../../App";
+import MyContext from "../../../context/MyContext";
 
 const ShoppingCartPage = () => {
+  // data initialisation - start
+  // const [myContextData, setMyContextData] = useState(MyContext);
+  const myContextData = useContext(MyContext);
+  console.log(myContextData.cartState);
+
+  
+  let dummyData = [
+    {
+      id: "M1",
+      category: "Mens",
+      brand: "HRX Hrithik Roshan",
+      title: "Men Rapid Dry Running Joggers",
+      discounted_price: 600,
+      strike_price: 1500,
+      discount: "(65% OFF)",
+      images: [
+        "https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_1.8,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.2,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.4,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.6,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.8,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg",
+      ],
+      size: ["XS", "S", "M", "L", "XL", "XXL"],
+      rating: 3.7,
+      rating_count: 13.8,
+      quantity: 1,
+      selected_size: "S",
+    },
+    {
+      id: "M2",
+      category: "Mens",
+      brand: "Roadster",
+      title: "Printed Casual Shirt",
+      discounted_price: 500,
+      strike_price: 1000,
+      discount: "(60% OFF)",
+      images: [
+        "https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_1.8,q_60,w_210,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.0,q_60,w_210,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.2,q_60,w_210,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.4,q_60,w_210,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.6,q_60,w_210,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg",
+        "https://assets.myntassets.com/f_webp,dpr_2.8,q_60,w_210,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg",
+      ],
+      size: ["S", "M", "L", "XL", "XXL", "3XL", "XXXL"],
+      rating: 4.1,
+      rating_count: 25.9,
+      quantity: 2,
+      selected_size: "M",
+    },
+  ];
+  const [cartData, setCartData] = useState(myContextData.cartState);
+
+  // cartData = myContextData.cartState;
+  console.log(cartData);
+  // data initialisation - end
+
+  // the billing section - start
+  function calculateSum(array, property) {
+    const total = array.reduce((accumulator, object) => {
+      return accumulator + object[property] * object.quantity;
+    }, 0);
+    return total;
+  }
+
+  let convenienceFee = 0;
+  let totalAmount = calculateSum(cartData, "discounted_price");
+  let totalMRP = calculateSum(cartData, "strike_price") + convenienceFee;
+  let discountonMrp = totalMRP - totalAmount;
+  // the billing section - end
+
+  // events - start
+  //  updating quantity
+
+  const handleIncrement = (id) => {
+    const newCartData = cartData.map((item) => {
+      if (item.id === id) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
+      return item;
+    });
+    setCartData(newCartData);
+  };
+
+  const handleDecrement = (id) => {
+    const newCartData = cartData.map((item) => {
+      if (item.id === id) {
+        if(item.quantity === 1){
+        return { ...item, quantity: item.quantity};}
+
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    setCartData(newCartData);
+  };
+
+  // deleting
+  const handleDelete = (id) => {
+    const newCartData = cartData.filter((item) => item.id !== id);
+    setCartData(newCartData);
+  };
+  // events - end
+
   return (
     <div id="ShoppingCartPage">
       {/* navbar */}
@@ -34,281 +146,64 @@ const ShoppingCartPage = () => {
                 <th>Price</th>
                 <th>Delete</th>
               </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1}>
-                  <img
-                    className="ShoppingCartPage-tableImg"
-                    src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/7610386/2022/4/19/c6fe5c9f-9a2b-46c9-90cc-6479f7d8ea581650366004453HRXbyHrithikRoshanMenBlackSolidRapidDryRunningJoggers2.jpg"
-                  />
-                </td>
-                <td colSpan={1} className="ShoppingCartPage-tableDesc">
-                  <h3>Title</h3>
-                  <h4>Description</h4>
-                </td>
-                <td colSpan={1}>
-                  <div className="ShoppingCartPage-addBox">S</div>
-                </td>
-                <td>
-                  <div>
-                    <span className="ShoppingCartPage-addBox2">-</span>
-                    <span className="ShoppingCartPage-addBox">1</span>
-                    <span className="ShoppingCartPage-addBox2">+</span>
-                  </div>
-                </td>
-                <td className="ShoppingCartPage-listPrice">₹ 765</td>
-                <td>
-                  <div className="ShoppingCartPage-addBoxDelete">X</div>
-                </td>
-              </tr>
+              {cartData.map((item) => (
+                <tr key={item.id}>
+                  <td colSpan={1}>
+                    <img
+                      className="ShoppingCartPage-tableImg"
+                      src={item.images[0]}
+                      alt="cart image"
+                    />
+                  </td>
+                  <td colSpan={1} className="ShoppingCartPage-tableDesc">
+                    <h3>{item.title}</h3>
+                    <h4>{item.brand}</h4>
+                  </td>
+                  <td colSpan={1}>
+                    <div className="ShoppingCartPage-addBox">
+                      {item.selected_size}
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <span
+                        className="ShoppingCartPage-addBox2"
+                        onClick={() => handleDecrement(item.id)}
+                      >
+                        -
+                      </span>
+                      <span className="ShoppingCartPage-addBox">{item.quantity}</span>
+                      <span
+                        className="ShoppingCartPage-addBox2"
+                        onClick={() => handleIncrement(item.id)}
+                      >
+                        +
+                      </span>
+                    </div>
+                  </td>
+                  <td className="ShoppingCartPage-listPrice">
+                    ₹ {item.discounted_price * item.quantity}
+                  </td>
+                  <td>
+                    <div className="ShoppingCartPage-addBoxDelete" onClick={() => handleDelete(item.id)}>X</div>
+                  </td>
+                </tr>
+              ))}
             </table>
           </div>
           <div className="ShoppingCartPage-PriceSection">
             <div className="ShoppingCartPage-priceBaseContainer">
               <h2 className="ShoppingCartPage-priceheading">
                 PRICE DETAILS
-                <span> (2 Items)</span>
+                <span> ({cartData.length} Items)</span>
               </h2>
               <div className="ShoppingCartPage-priceDetail">
                 <h3>Total MRP</h3>
-                <h3>₹ 6989</h3>
+                <h3>₹ {totalMRP}</h3>
               </div>
               <div className="ShoppingCartPage-priceDetail">
                 <h3>Discount on MRP</h3>
-                <h3>- ₹ 3316</h3>
+                <h3>- ₹ {discountonMrp}</h3>
               </div>
               <div className="ShoppingCartPage-priceDetail">
                 <h3>Convenience Fee</h3>
@@ -316,7 +211,7 @@ const ShoppingCartPage = () => {
               </div>
               <div className="ShoppingCartPage-priceDetail ShoppingCartPage-totalAmount">
                 <h3>Total Amount</h3>
-                <h3>₹ 3673</h3>
+                <h3>₹ {totalAmount}</h3>
               </div>
               <button className="ShoppingCartPage-buyButton">
                 PLACE ORDER
