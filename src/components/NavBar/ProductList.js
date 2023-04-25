@@ -3,7 +3,7 @@ import './NavBar.css'
 import { Link } from 'react-router-dom';
 
 const ProductList = ({ products }) => {
-  console.log(products);
+  // console.log(products);
   return (
     <div className='navBar-searchListBox'>
       {products.map((product) => (

@@ -8,11 +8,11 @@ const useFetch = (url) => {
     axios
       .get(url)
       .then((data) => {
-        // console.log(data);
+        // // console.log(data);
         setResponses(data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }, []);
   return responses;

@@ -40,11 +40,11 @@ const [childrensData, setChildrensData] = useState([]);
 //         setWomensData(data2);
 //         setChildrensData(data3);
 
-//         console.log(mensData);
+//         // console.log(mensData);
 //       }
 
 //     } catch (error) {
-//       console.log(error);
+//       // console.log(error);
 //     }
 //   };
 //   fetchData();
@@ -74,7 +74,7 @@ const [childrensData, setChildrensData] = useState([]);
     "rating_count": 0.0
   }]
   
-  // console.log(params.category);
+  // // console.log(params.category);
   
 
   let [defaultData,setDefaultData] = useState(combinedData);
@@ -125,21 +125,21 @@ switch(selection) {
       return parseInt(b.discount.replace(/\D/g, "")) - parseInt(a.discount.replace(/\D/g, ""));
     });
     setInputData(sortByDiscount);
-    // console.log(selection);
+    // // console.log(selection);
     setSortLabel('Better Discount');
     break;
   }
   case "high_to_low": {
     const sortByPrice = inputData.sort((a,b) => b.discounted_price - a.discounted_price);
     setInputData(sortByPrice);
-    // console.log(selection);
+    // // console.log(selection);
     setSortLabel('Price High to Low');
     break;
   }
   case "low_to_high": {
     const sortByPrice = inputData.sort((a,b) => a.discounted_price - b.discounted_price);
     setInputData(sortByPrice);
-    // console.log(selection);
+    // // console.log(selection);
     setSortLabel('Price Low to High');
     break;
   }
@@ -177,7 +177,7 @@ const uniqueBrandFilter = removeDuplicates(brandFilter);
   const filterByBrand = (event) => {
 
   const {value, checked} = event.target
-// console.log(value);
+// // console.log(value);
 
   // /*
     if(value === "all"){
@@ -185,17 +185,17 @@ const uniqueBrandFilter = removeDuplicates(brandFilter);
       brandData = (defaultData);
     }
     else {
-      // console.log(defaultData);
+      // // console.log(defaultData);
       brandData = (defaultData.filter(item =>item.brand === value))
-      // console.log(brandData);
+      // // console.log(brandData);
       if(brandData.length === 0 || brandData === undefined) {
         setInputData(noInputData);
-        // console.log('no data');
+        // // console.log('no data');
       }
       else {
       setInputData(brandData);
-      // console.log('set');
-      // console.log(inputData);
+      // // console.log('set');
+      // // console.log(inputData);
       }
     }
 
@@ -212,7 +212,7 @@ const uniqueBrandFilter = removeDuplicates(brandFilter);
   }else{
     selectedArray = [...prevArray.filter(brand => brand !== value)]
   }
-console.log(`selectedArray value: ${selectedArray}`);
+// console.log(`selectedArray value: ${selectedArray}`);
 */
 
 }
@@ -223,7 +223,7 @@ const filterByPrice = (min,max) => {
   const filterByPriceArray = brandData.filter((item)=> {
     return (item.discounted_price >= min) && (item.discounted_price <= max);
   })
-  // console.log(filterByPriceArray);
+  // // console.log(filterByPriceArray);
   setInputData(filterByPriceArray);
   if(filterByPriceArray.length === 0 || filterByPriceArray === []){
     setInputData(noInputData);
@@ -238,7 +238,7 @@ const filterByPrice = (min,max) => {
     return (parseInt(item.discount.replace(/\D/g, "")) >= min);
   })
 
-  console.log(filterByDiscountArray);
+  // console.log(filterByDiscountArray);
   setInputData(filterByDiscountArray);
   if(filterByDiscountArray.length === 0 || filterByDiscountArray === []){
     setInputData(noInputData);

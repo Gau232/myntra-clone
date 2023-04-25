@@ -42,11 +42,11 @@ const ProductPage = () => {
   };
 
   const params = useParams();
-  // console.log(params);
+  // // console.log(params);
   productDetails = combinedData.filter((item) => {
     return item.id === params.id;
   });
-  // console.log(productDetails);
+  // // console.log(productDetails);
 
   // productDetails = prop ? productDetails : prop;
 
@@ -65,9 +65,9 @@ const ProductPage = () => {
     setSelectedItem(index);
     setSelectedSize(size);
   };
-  // console.log(selectedSize);
+  // // console.log(selectedSize);
   const myContextData = useContext(MyContext);
-  // console.log(myContextData);
+  // // console.log(myContextData);
 
   const handleAddToCart = () => {
     if (selectedSize === null) {
@@ -87,8 +87,8 @@ const ProductPage = () => {
         (item) => item.id === productDetails[0].id
       );
       if (cartItem) {
-        console.log("found");
-        // console.log(cartItem);
+        // console.log("found");
+        // // console.log(cartItem);
         if (cartItem.selected_size === selectedSize) {
           // alert(`Product in size ${selectedSize} already exist in bag`);
           toast.info(`Product in selected size already exist in bag`, {
@@ -117,7 +117,7 @@ const ProductPage = () => {
             });
         }
       } else {
-        console.log("! found");
+        // console.log("! found");
         addProductToCart();
         toast.success('Item added to bag. Please check your bag', {
           position: "top-center",
@@ -137,10 +137,10 @@ const ProductPage = () => {
     let currProductDetails = productDetails;
     currProductDetails.quantity = 1;
     currProductDetails.selected_size = selectedSize;
-    console.log(currProductDetails);
+    // console.log(currProductDetails);
     myContextData.addToCart(currProductDetails);
   }
-  // console.log(myContextData);
+  // // console.log(myContextData);
 
   const items = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
@@ -150,9 +150,9 @@ const ProductPage = () => {
   //   // currProductDetails.quantity = 1;
   //   const newObject = Object.assign({}, currProductDetails, { quantity: 1 },{ selected_size: selectedSize });
   //   // currProductDetails.selected_size = selectedSize;
-  //   console.log(newObject);
+  //   // console.log(newObject);
   //   dispatch(addToCart(newObject));
-  //   console.log(items);
+  //   // console.log(items);
   // }
 
   return (

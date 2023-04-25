@@ -17,7 +17,7 @@ const LoginPage = () => {
   const handleSignIn = async (event) => {
     event.preventDefault();
     let loggedIn = await signInWithEmailAndPassword(email, password);
-	console.log(loggedIn.uid);
+	// console.log(loggedIn.uid);
 	if(loggedIn && loggedIn.uid){
 		updateLoginStatus(true);
 		toast.success('Logged in successfully!', {
@@ -30,7 +30,7 @@ const LoginPage = () => {
 			progress: undefined,
 			theme: "light",
 			});
-		console.log(isLoggedin);
+		// console.log(isLoggedin);
 		loggedIn=undefined;
 		setTimeout(()=>{
 			navigate("/");

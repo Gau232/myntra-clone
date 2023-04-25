@@ -26,9 +26,9 @@ const Card = (props) => {
     rating_count: 13.8,
   };
 
-// console.log(`props`,props.data);
+// // console.log(`props`,props.data);
   productDetails = (props.data === undefined) ? productDetails : props.data;
-// console.log(`productDetails`,productDetails);
+// // console.log(`productDetails`,productDetails);
 
   return (
     <li className="product-base">

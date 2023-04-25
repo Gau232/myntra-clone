@@ -25,7 +25,7 @@ const NavBar = () => {
 
   const products = combinedData;
 
-  console.log(products);
+  // console.log(products);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
 
@@ -42,9 +42,9 @@ const NavBar = () => {
   // search bar end
 
   const myContextData = useContext(MyContext);
-  // console.log(myContextData);
+  // // console.log(myContextData);
   const [cartCount, setCartCount] = useState(0);
-  console.log(myContextData.cartState.length);
+  // console.log(myContextData.cartState.length);
   useEffect(() => {
     setCartCount(myContextData.cartState.length);
   }, [myContextData]);
@@ -56,7 +56,7 @@ const NavBar = () => {
 
 
   const { isLoggedin, updateLoginStatus } = useContext(MyContext);
-  console.log(isLoggedin);
+  // console.log(isLoggedin);
   const navigate = useNavigate();
   const loginHandler = () => {
     navigate("/login");
@@ -65,7 +65,7 @@ const NavBar = () => {
   const logoutHandler = () => {
     signOut();
     updateLoginStatus(false);
-    console.log(isLoggedin);
+    // console.log(isLoggedin);
   };
 
   return (

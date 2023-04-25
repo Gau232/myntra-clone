@@ -23,9 +23,9 @@ const SignupPage = () => {
         email,
         password
       )
-        console.log(signUp);
+        // console.log(signUp);
         if (signUp && signUp.uid) {
-          console.log("Registration successful!");
+          // console.log("Registration successful!");
 		  toast.success('Registration successful!', {
 			position: "top-center",
 			autoClose: 1500,
@@ -42,7 +42,7 @@ const SignupPage = () => {
 		},2000);
         }
 		else {
-          console.log("Registration failed!");
+          // console.log("Registration failed!");
 		  toast.error('Registration failed!', {
 			position: "top-center",
 			autoClose: 1500,
@@ -56,7 +56,7 @@ const SignupPage = () => {
         }
       
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

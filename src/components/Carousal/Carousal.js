@@ -2,13 +2,13 @@ import "./Carousal.css";
 
 const Carousal = () => {
   const carousalImages = document.getElementsByClassName("carousal-images");
-  console.log(carousalImages);
+  // console.log(carousalImages);
   let counter = 0;
 
   function myfunction() {
     setInterval(() => {
       counter += 100;
-      //   console.log(carousalImages);
+      //   // console.log(carousalImages);
       //   carousalImages.forEach((element) => {
       //     element.style.width = `${counter}%)`;
       //   });

@@ -26,22 +26,22 @@ const ApiContextProvider = ({ children }) => {
         {// const response1 = await fetch(HOMEPAGE_API_URL);
         // const json1 = await response1.json();
         // setHomePageData(json1);
-        // console.log(homePageData);
+        // // console.log(homePageData);
 
         // const response2 = await fetch(MENS_API_URL);
         // const json2 = await response2.json();
         // setMensData(json2);
-        // console.log(mensData);
+        // // console.log(mensData);
 
         // const response3 = await fetch(WOMENS_API_URL);
         // const json3 = await response3.json();
         // setWomensData(json3);
-        // console.log(womensData);
+        // // console.log(womensData);
         
         // const response4 = await fetch(CHILDRENS_API_URL);
         // const json4 = await response4.json();
         // setChildrensData(json4);
-        // console.log(childrensData);
+        // // console.log(childrensData);
         }
 
         {
@@ -61,7 +61,7 @@ const ApiContextProvider = ({ children }) => {
         }
 
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
 

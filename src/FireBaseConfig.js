@@ -18,10 +18,10 @@ export const signInWithEmailAndPassword = async (email, password) => {
       .auth()
       .signInWithEmailAndPassword(email, password);
     const user = userCredential.user;
-    console.log(user);
+    // console.log(user);
     return user;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
@@ -37,11 +37,11 @@ export const registerWithEmailAndPassword = async (displayName, email, password)
     await user.updateProfile({
         displayName: displayName,
     });
-        console.log(user);
+        // console.log(user);
         return user;
 
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return null;
   }
 };
@@ -51,10 +51,10 @@ export const signOut = async () => {
   try {
     await firebase.auth().signOut();
     // updateLoginStatus(false);
-    // console.log(isLoggedin);
+    // // console.log(isLoggedin);
     const status="signedout";
     return status;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

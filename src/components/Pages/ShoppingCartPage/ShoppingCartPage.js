@@ -11,7 +11,7 @@ const ShoppingCartPage = () => {
   // data initialisation - start
   // const [myContextData, setMyContextData] = useState(MyContext);
   const myContextData = useContext(MyContext);
-  console.log(myContextData.cartState);
+  // console.log(myContextData.cartState);
 
   let dummyData = [
     {
@@ -65,11 +65,11 @@ const ShoppingCartPage = () => {
   ];
   const [cartData, setCartData] = useState(myContextData.cartState);
   const items = useSelector((state) => state.cart.items);
-console.log("redux store");
-console.log(items);
+// console.log("redux store");
+// console.log(items);
   // setCartData(items);
   // cartData = myContextData.cartState;
-  console.log(cartData);
+  // console.log(cartData);
   // data initialisation - end
 
   // the billing section - start
@@ -122,7 +122,7 @@ console.log(items);
 
 //place order handler
 const { isLoggedin, updateLoginStatus } = useContext(MyContext);
-console.log(isLoggedin);
+// console.log(isLoggedin);
 const navigate = useNavigate();
 const placeOrderHandler = () => {
 

@@ -78,7 +78,7 @@ const HomePageCards = () => {
     const callApi = async () => {
       const data2 = await fetch ("https://classic-world.onrender.com/HomePageData");
       const data3 = await data2.json();
-      console.log(data3);
+      // console.log(data3);
       setInputData(data3);
     }
     callApi();
@@ -86,7 +86,7 @@ const HomePageCards = () => {
 
 
   // let data1 = useContext(ApiContext).apiData[0];
-  // console.log(data1);
+  // // console.log(data1);
   
 
 // !inputData? (<Loader/>) :
