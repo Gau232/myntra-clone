@@ -1,8 +1,11 @@
 import "./ShoppingCartPage.css";
 import NavBar from "../../NavBar/NavBar";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 // import { MyContext } from "../../../App";
 import MyContext from "../../../context/MyContext";
+import { Link,useNavigate } from "react-router-dom";
+import logo from "../../../assets/images/Myntra_Logo_nobg.png";
+import { useSelector } from 'react-redux';
 
 const ShoppingCartPage = () => {
   // data initialisation - start
@@ -10,7 +13,6 @@ const ShoppingCartPage = () => {
   const myContextData = useContext(MyContext);
   console.log(myContextData.cartState);
 
-  
   let dummyData = [
     {
       id: "M1",
@@ -62,7 +64,10 @@ const ShoppingCartPage = () => {
     },
   ];
   const [cartData, setCartData] = useState(myContextData.cartState);
-
+  const items = useSelector((state) => state.cart.items);
+console.log("redux store");
+console.log(items);
+  // setCartData(items);
   // cartData = myContextData.cartState;
   console.log(cartData);
   // data initialisation - end
@@ -97,8 +102,9 @@ const ShoppingCartPage = () => {
   const handleDecrement = (id) => {
     const newCartData = cartData.map((item) => {
       if (item.id === id) {
-        if(item.quantity === 1){
-        return { ...item, quantity: item.quantity};}
+        if (item.quantity === 1) {
+          return { ...item, quantity: item.quantity };
+        }
 
         return { ...item, quantity: item.quantity - 1 };
       }
@@ -114,11 +120,28 @@ const ShoppingCartPage = () => {
   };
   // events - end
 
+//place order handler
+const { isLoggedin, updateLoginStatus } = useContext(MyContext);
+console.log(isLoggedin);
+const navigate = useNavigate();
+const placeOrderHandler = () => {
+
+  if(isLoggedin) alert("Congratulations! Your order has been placed.");
+  else {
+    navigate("/login");
+  }
+  // alert("Please login to place an order");
+}
+
   return (
     <div id="ShoppingCartPage">
-      {/* navbar */}
       <NavBar />
       <div id="ShoppingCartPage-nav">
+        <div className="ShoppingCartPage-logoHolder">
+          <Link to={"/"}>
+            <img className="ShoppingCartPage-logo" src={logo} alt="myntra logo" />
+          </Link>
+        </div>
         <div id="ShoppingCartPage-navMid">
           <span>
             <span className="ShoppingCartPage-navHighlight">BAG</span>{" "}
@@ -126,7 +149,7 @@ const ShoppingCartPage = () => {
           </span>
         </div>
         <div id="ShoppingCartPage-navEnd">
-          <div class="ShoppingCartPage-secureContainer">
+          <div className="ShoppingCartPage-secureContainer">
             <img src="https://constant.myntassets.com/checkout/assets/img/sprite-secure.png" />
             <div>100% SECURE</div>
           </div>
@@ -138,6 +161,7 @@ const ShoppingCartPage = () => {
         <div className="ShoppingCartPage-main">
           <div className="ShoppingCartPage-itemListSection">
             <table>
+              <thead>
               <tr>
                 <th>Image</th>
                 <th colSpan={1}>Description</th>
@@ -146,7 +170,10 @@ const ShoppingCartPage = () => {
                 <th>Price</th>
                 <th>Delete</th>
               </tr>
-              {cartData.map((item) => (
+              </thead>
+              <tbody>
+              {
+              cartData.map((item) => (
                 <tr key={item.id}>
                   <td colSpan={1}>
                     <img
@@ -172,7 +199,9 @@ const ShoppingCartPage = () => {
                       >
                         -
                       </span>
-                      <span className="ShoppingCartPage-addBox">{item.quantity}</span>
+                      <span className="ShoppingCartPage-addBox">
+                        {item.quantity}
+                      </span>
                       <span
                         className="ShoppingCartPage-addBox2"
                         onClick={() => handleIncrement(item.id)}
@@ -185,10 +214,17 @@ const ShoppingCartPage = () => {
                     ₹ {item.discounted_price * item.quantity}
                   </td>
                   <td>
-                    <div className="ShoppingCartPage-addBoxDelete" onClick={() => handleDelete(item.id)}>X</div>
+                    <div
+                      className="ShoppingCartPage-addBoxDelete"
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      X
+                    </div>
                   </td>
                 </tr>
-              ))}
+              ))
+              }
+              </tbody>
             </table>
           </div>
           <div className="ShoppingCartPage-PriceSection">
@@ -213,7 +249,7 @@ const ShoppingCartPage = () => {
                 <h3>Total Amount</h3>
                 <h3>₹ {totalAmount}</h3>
               </div>
-              <button className="ShoppingCartPage-buyButton">
+              <button className="ShoppingCartPage-buyButton" onClick={placeOrderHandler}>
                 PLACE ORDER
               </button>
             </div>

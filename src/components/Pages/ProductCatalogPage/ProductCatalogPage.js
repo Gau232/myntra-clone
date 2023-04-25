@@ -7,13 +7,51 @@ import { useEffect, useState } from "react";
 
 const ProductCatalogPage = () => {
 
-  const params = useParams();
 
   let inputDataMen = require("../../../assets/inputData/mens_data.json");
   let inputDataWomen = require("../../../assets/inputData/womens_data.json");
   let inputDataChildren = require("../../../assets/inputData/children_data.json");
   let combinedData = [...inputDataMen,...inputDataWomen,...inputDataChildren];
+  
+// api fetch - start
+const MENS_API_URL = "https://classic-world.onrender.com/MensData";
+const WOMENS_API_URL = "https://classic-world.onrender.com/WomensData";
+const CHILDRENS_API_URL = "https://classic-world.onrender.com/ChildrensData";
+const [mensData, setMensData] = useState([]);
+const [womensData, setWomensData] = useState([]);
+const [childrensData, setChildrensData] = useState([]);
 
+
+// useEffect(() => {
+//   const fetchData = async () => {
+//     try {
+//       {
+//         const [api1, api2, api3] = await Promise.all([
+//           fetch(MENS_API_URL),
+//           fetch(WOMENS_API_URL),
+//           fetch(CHILDRENS_API_URL),
+//         ]);
+//         const [data1, data2, data3] = await Promise.all([
+//           api1.json(),
+//           api2.json(),
+//           api3.json(),
+//         ]);
+//         setMensData(data1);
+//         setWomensData(data2);
+//         setChildrensData(data3);
+
+//         console.log(mensData);
+//       }
+
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+//   fetchData();
+// }, []);
+
+// api fetch - end
+    
   let noInputData = [{
     "id": "noData",
     "category": "Data Unavailable",
@@ -38,9 +76,13 @@ const ProductCatalogPage = () => {
   
   // console.log(params.category);
   
-  // let defaultData = combinedData;
+
   let [defaultData,setDefaultData] = useState(combinedData);
   let [inputData,setInputData] = useState(combinedData);
+
+
+  const params = useParams();
+
 
 useEffect(()=>{
   switch (params.category) {
@@ -64,33 +106,7 @@ useEffect(()=>{
       setInputData(combinedData);
   }
 }
-},[]);
-
-//   // console.log(inputData);
-// useEffect(()=>{
-//   switch (props.data) {
-//     case "men":{
-//   setInputData(inputDataMen);
-//       // inputData = inputDataMen;
-//       break;
-//     }
-//     case "women":{
-//   setInputData(inputDataWomen);
-//       // inputData = inputDataWomen;
-//       break;
-//     }
-//     case "children":{
-//   setInputData(inputDataChildren);
-//       // inputData = inputDataChildren;
-//       break;
-//     }
-//     default: {
-//   setInputData(combinedData);
-//       // inputData = combinedData;
-//   }
-// }
-//   // console.log(inputData);
-// },[])
+},[params]);
 
 
 // Sorting - start
@@ -161,7 +177,7 @@ const uniqueBrandFilter = removeDuplicates(brandFilter);
   const filterByBrand = (event) => {
 
   const {value, checked} = event.target
-console.log(value);
+// console.log(value);
 
   // /*
     if(value === "all"){
@@ -169,17 +185,17 @@ console.log(value);
       brandData = (defaultData);
     }
     else {
-      console.log(defaultData);
+      // console.log(defaultData);
       brandData = (defaultData.filter(item =>item.brand === value))
-      console.log(brandData);
+      // console.log(brandData);
       if(brandData.length === 0 || brandData === undefined) {
         setInputData(noInputData);
-        console.log('no data');
+        // console.log('no data');
       }
       else {
       setInputData(brandData);
-      console.log('set');
-      console.log(inputData);
+      // console.log('set');
+      // console.log(inputData);
       }
     }
 
@@ -245,15 +261,15 @@ inputData &&
       <div id="catalog-container">
         {/* breadcrumb */}
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
               <Link to={"/"}>Home</Link>
             </li>
-            <li class="breadcrumb-item">
-              <Link to={"/catalog"}>Catalog</Link>
+            <li className="breadcrumb-item">
+              <Link>Catalog</Link>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Men
+            <li className="breadcrumb-item active breadcrumb-text" aria-current="page">
+              {params.category}
             </li>
           </ol>
         </nav>
@@ -263,9 +279,9 @@ inputData &&
           <div id="filterName">FILTERS</div>
 
           {/* sort dropdown */}
-          <div class="dropdown">
+          <div className="dropdown">
             <button
-              class="btn btn-secondary dropdown-toggle"
+              className="btn btn-secondary dropdown-toggle"
               type="button"
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
@@ -273,29 +289,29 @@ inputData &&
             >
               Sort by : <span id="btn-selectedOption">{sortLabel}</span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
-                <a class="dropdown-item" onClick={()=>sortHandler('recommended')}>
+                <a className="dropdown-item" onClick={()=>sortHandler('recommended')}>
                   Recommended
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" onClick={()=>sortHandler('discount')}>
+                <a className="dropdown-item" onClick={()=>sortHandler('discount')}>
                   Better Discount
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" onClick={()=>sortHandler('high_to_low')}>
+                <a className="dropdown-item" onClick={()=>sortHandler('high_to_low')}>
                   Price: High to Low
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" onClick={()=>sortHandler('low_to_high')}>
+                <a className="dropdown-item" onClick={()=>sortHandler('low_to_high')}>
                   Price: Low to High
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" onClick={()=>sortHandler('rating')}>
+                <a className="dropdown-item" onClick={()=>sortHandler('rating')}>
                   Customer Rating
                 </a>
               </li>
@@ -446,8 +462,8 @@ inputData &&
           </div>
 
           <div id="catalog-cardSection">
-            {inputData.map((e)=>(
-              <Card data={e}/>
+            {inputData.map((e,index)=>(
+              <Card key={index} data={e}/>
             ))
             };
           </div>

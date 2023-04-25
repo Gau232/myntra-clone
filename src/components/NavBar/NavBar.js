@@ -1,6 +1,14 @@
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+
+import MyContext from "../../context/MyContext";
+
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/Myntra_Logo_nobg.png";
+import ProductList from "./ProductList";
+import SearchBar from "./SearchBar";
+import { signOut } from "../../FireBaseConfig";
+
 import {
   HiOutlineSearch,
   HiOutlineUser,
@@ -9,8 +17,57 @@ import {
 } from "react-icons/hi";
 
 const NavBar = () => {
+  // search bar start
+  let inputDataMen = require("../../assets/inputData/mens_data.json");
+  let inputDataWomen = require("../../assets/inputData/womens_data.json");
+  let inputDataChildren = require("../../assets/inputData/children_data.json");
+  let combinedData = [...inputDataMen, ...inputDataWomen, ...inputDataChildren];
 
-  const cat = "women";
+  const products = combinedData;
+
+  console.log(products);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState(products);
+
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+    const filteredProducts = products.filter((product) =>
+      product.brand?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.title?.toLowerCase().includes(searchTerm.toLowerCase()) 
+    );
+    setFilteredProducts(filteredProducts);
+  };
+
+  // search bar end
+
+  const myContextData = useContext(MyContext);
+  // console.log(myContextData);
+  const [cartCount, setCartCount] = useState(0);
+  console.log(myContextData.cartState.length);
+  useEffect(() => {
+    setCartCount(myContextData.cartState.length);
+  }, [myContextData]);
+
+  const [isProfileVisible, setIsProfileVisible] = useState(false);
+  const profileBoxVisibilityHandler = () => {
+    setIsProfileVisible(!isProfileVisible);
+  };
+
+
+  const { isLoggedin, updateLoginStatus } = useContext(MyContext);
+  console.log(isLoggedin);
+  const navigate = useNavigate();
+  const loginHandler = () => {
+    navigate("/login");
+    // updateLoginStatus(!isLoggedin);
+  };
+  const logoutHandler = () => {
+    signOut();
+    updateLoginStatus(false);
+    console.log(isLoggedin);
+  };
+
   return (
     <>
       <div className="navBar-backSpace"></div>
@@ -41,24 +98,46 @@ const NavBar = () => {
         <div className="navBar-rightSection">
           <div className="NavBar-searchBar">
             <HiOutlineSearch className="navBar-searchIcon" />
-            <input
+            {/* <input
               className="navBar-search"
               type="text"
               placeholder="Search for products, brands and more"
-            />
+            /> */}
+            <SearchBar searchTerm={searchTerm} handleSearch={handleSearch}/>
+            {searchTerm && <ProductList products={filteredProducts} />}
           </div>
-          <a className="navBar-iconContainer">
-            <HiOutlineUser className="navBar-icon" />
-            <div>Profile</div>
-          </a>
-          <a className="navBar-iconContainer">
+          <div
+            className="navBar-profileSectionWrapper"
+            onClick={profileBoxVisibilityHandler}
+          >
+            <div className="navBar-iconContainer">
+              <HiOutlineUser className="navBar-icon" />
+              <div className="navBar-iconHead">Profile</div>
+              {isProfileVisible && (
+                <div className="navBar-profileSectionContainer">
+                  <div>
+                    Welcome
+                    {!isLoggedin && (
+                      <div>To access account and manage orders</div>
+                    )}
+                    {isLoggedin && <div>Happy to have you back!</div>}
+                  </div>
+                  {!isLoggedin && (
+                    <button onClick={loginHandler}>LOGIN / SIGNUP</button>
+                  )}
+                  {isLoggedin && <button onClick={logoutHandler}>LOGOUT</button>}
+                </div>
+              )}
+            </div>
+          </div>
+          <a href="/cart" className="navBar-iconContainer">
             <HiOutlineHeart className="navBar-icon" />
-            <div>Wishlist</div>
+            <div className="navBar-iconHead">Wishlist</div>
           </a>
           <a href="/cart" className="navBar-iconContainer navBar-cartIcon">
             <HiOutlineShoppingBag className="navBar-icon" />
-            <span className="navBar-cart-list-length">0</span>
-            <div>Bag</div>
+            <span className="navBar-cart-list-length">{cartCount}</span>
+            <div className="navBar-iconHead">Bag</div>
           </a>
         </div>
       </div>

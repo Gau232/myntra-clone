@@ -4,9 +4,10 @@ import HomePage from "./components/Pages/HomePage/HomePage";
 import ProductCatalogPage from "./components/Pages/ProductCatalogPage/ProductCatalogPage";
 import ProductPage from "./components/Pages/ProductPage/ProductPage";
 import ShoppingCartPage from "./components/Pages/ShoppingCartPage/ShoppingCartPage";
-import PaymentModalPage from "./components/Pages/PaymentModalPage/PaymentModalPage";
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
+import SignupPage from './components/Pages/SignupPage/SignupPage';
+import LoginPage from './components/Pages/LoginPage/LoginPage';
 
 const AppRouter = () => {
     return (
@@ -17,9 +18,9 @@ const AppRouter = () => {
                 <Route path="/catalog/:category" element={<ProductCatalogPage />} />
                 <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="/cart" element={<ShoppingCartPage />} />
-                <Route path="/payment" element={<PaymentModalPage />} />
-                {/* <Route path="/signup" element={<Signup />} />
-                <Route path="/checkout" element={<Checkout />} /> */}
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                {/* <Route path="/checkout" element={<Checkout />} /> */}
             </Routes>
             {/* <Footer /> */}
         </BrowserRouter>

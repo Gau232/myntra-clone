@@ -12,7 +12,9 @@ margin-bottom: 0.4rem;
     color: grey;
 }
 
-
+.breadcrumb-text {
+    text-transform: capitalize;
+}
 
 /* sort section */
 #catalog-SortSection {

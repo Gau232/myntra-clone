@@ -1,15 +1,17 @@
 import "./ProductPage.css";
 
 import NavBar from "../../NavBar/NavBar";
+import Footer from "../../Footer/Footer"
 import { HiOutlineHeart, HiOutlineShoppingBag } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import MyContext from "../../../context/MyContext";
+import { addToCart } from "../../../redux/cartSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductPage = () => {
-  // const [myContextData, setMyContextData] = useState(MyContext);
-  const myContextData = useContext(MyContext);
-console.log(myContextData);
 
   let inputDataMen = require("../../../assets/inputData/mens_data.json");
   let inputDataWomen = require("../../../assets/inputData/womens_data.json");
@@ -64,10 +66,22 @@ console.log(myContextData);
     setSelectedSize(size);
   };
   // console.log(selectedSize);
+  const myContextData = useContext(MyContext);
+  // console.log(myContextData);
 
   const handleAddToCart = () => {
     if (selectedSize === null) {
-      alert("Please select a size");
+      // alert("Please select a size");
+      toast.info('Please select a size', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     } else {
       let cartItem = myContextData.cartState.find(
         (item) => item.id === productDetails[0].id
@@ -76,28 +90,70 @@ console.log(myContextData);
         console.log("found");
         // console.log(cartItem);
         if (cartItem.selected_size === selectedSize) {
-          alert(`Product in size ${selectedSize} already exist in cart`);
+          // alert(`Product in size ${selectedSize} already exist in bag`);
+          toast.info(`Product in selected size already exist in bag`, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+          
         } else {
           addProductToCart();
+          // alert(`Item added to bag. Please check your bag.`);
+          toast.success('Item added to bag. Please check your bag', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
         }
       } else {
         console.log("! found");
         addProductToCart();
+        toast.success('Item added to bag. Please check your bag', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
       }
     }
   };
 
-  function addProductToCart () {
-    let currProductDetails = productDetails[0];
+  function addProductToCart() {
+    let currProductDetails = productDetails;
     currProductDetails.quantity = 1;
     currProductDetails.selected_size = selectedSize;
-    // console.log(currProductDetails);
-    // myContextData.cartState.push(currProductDetails);
-    // myContextData.updateCartContext(currProductDetails);
-    myContextData.setCartState([...myContextData.cartState, currProductDetails]);
-    // console.log(myContextData);
+    console.log(currProductDetails);
+    myContextData.addToCart(currProductDetails);
   }
-  console.log(myContextData);
+  // console.log(myContextData);
+
+  const items = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+
+  // function handleAddToCart() {
+  //   let currProductDetails = productDetails[0];
+  //   // currProductDetails.quantity = 1;
+  //   const newObject = Object.assign({}, currProductDetails, { quantity: 1 },{ selected_size: selectedSize });
+  //   // currProductDetails.selected_size = selectedSize;
+  //   console.log(newObject);
+  //   dispatch(addToCart(newObject));
+  //   console.log(items);
+  // }
 
   return (
     <>
@@ -106,9 +162,10 @@ console.log(myContextData);
       <main id="productPage-main">
         <div id="productPage">
           <div className="productPage-imgsContainer">
-            {productDetails[0].images.slice(0, 4).map((image) => {
+            {productDetails[0].images.slice(0, 4).map((image, index) => {
               return (
                 <img
+                  key={index}
                   draggable="false"
                   src={image}
                   className="productPage-images"
@@ -118,12 +175,14 @@ console.log(myContextData);
           </div>
 
           <div className="productPage-itemDetailsSection">
-            <div class="productPage-titleSection">
-              <h1 class="productPage-title">
+            <div className="productPage-titleSection">
+              <h1 className="productPage-title">
                 {productDetails[0].brand}
-                <h1 class="productPage-name">{productDetails[0].title}</h1>
+                <div className="productPage-name">
+                  {productDetails[0].title}
+                </div>
               </h1>
-              <div class="productPage-rating">
+              <div className="productPage-rating">
                 <div>
                   {productDetails[0].rating} ⭐{" "}
                   <span> | {productDetails[0].rating_count}k Ratings</span>
@@ -185,6 +244,8 @@ console.log(myContextData);
           </div>
         </div>
       </main>
+      <Footer/>
+      <ToastContainer/>
     </>
   );
 };
