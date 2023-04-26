@@ -126,9 +126,33 @@ const { isLoggedin, updateLoginStatus } = useContext(MyContext);
 const navigate = useNavigate();
 const placeOrderHandler = () => {
 
-  if(isLoggedin) alert("Congratulations! Your order has been placed.");
+  if(isLoggedin) {
+    // alert("Congratulations! Your order has been placed.");
+    toast.success('Congratulations! Your order has been placed.', {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
   else {
-    navigate("/login");
+    toast.warn('Please login to place an order. Redirecting to login page...', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+      setTimeout(()=>{
+        navigate("/login");
+      },2000);
   }
   // alert("Please login to place an order");
 }
