@@ -6,6 +6,9 @@ import MyContext from "../../../context/MyContext";
 import { Link,useNavigate } from "react-router-dom";
 import logo from "../../../assets/images/Myntra_Logo_nobg.png";
 import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ShoppingCartPage = () => {
   // data initialisation - start
@@ -280,6 +283,7 @@ const placeOrderHandler = () => {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };
