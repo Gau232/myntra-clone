@@ -130,15 +130,15 @@ const NavBar = () => {
               )}
             </div>
           </div>
-          <a href="/cart" className="navBar-iconContainer">
+          <Link to="/cart" className="navBar-iconContainer">
             <HiOutlineHeart className="navBar-icon" />
             <div className="navBar-iconHead">Wishlist</div>
-          </a>
-          <a href="/cart" className="navBar-iconContainer navBar-cartIcon">
+          </Link>
+          <Link to="/cart" className="navBar-iconContainer navBar-cartIcon">
             <HiOutlineShoppingBag className="navBar-icon" />
             <span className="navBar-cart-list-length">{cartCount}</span>
             <div className="navBar-iconHead">Bag</div>
-          </a>
+          </Link>
         </div>
       </div>
     </>

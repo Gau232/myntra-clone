@@ -72,7 +72,7 @@ const ShoppingCartPage = () => {
 // console.log(items);
   // setCartData(items);
   // cartData = myContextData.cartState;
-  // console.log(cartData);
+  console.log(cartData);
   // data initialisation - end
 
   // the billing section - start

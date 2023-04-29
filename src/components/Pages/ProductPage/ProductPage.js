@@ -46,7 +46,7 @@ const ProductPage = () => {
   productDetails = combinedData.filter((item) => {
     return item.id === params.id;
   });
-  // // console.log(productDetails);
+  // console.log(productDetails[0]);
 
   // productDetails = prop ? productDetails : prop;
 
@@ -134,13 +134,13 @@ const ProductPage = () => {
   };
 
   function addProductToCart() {
-    let currProductDetails = productDetails;
+    let currProductDetails = productDetails[0];
     currProductDetails.quantity = 1;
     currProductDetails.selected_size = selectedSize;
-    // console.log(currProductDetails);
+    console.log(currProductDetails);
     myContextData.addToCart(currProductDetails);
+    // console.log(myContextData);
   }
-  // // console.log(myContextData);
 
   const items = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
