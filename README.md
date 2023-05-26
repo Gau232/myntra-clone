@@ -1,7 +1,6 @@
 # Myntra Clone - React jS app
 
 This web app is a closest clone of an e-commerce website - Myntra built using React. It uses API to fetch product data.
-It has home page, catalog page, product page, cart and user authentication features.
 
 ## Demo
 
