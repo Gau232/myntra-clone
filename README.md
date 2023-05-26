@@ -9,8 +9,8 @@ https://myntra-clone-pi.vercel.app/
 
 - Home page, catalog page, product page, cart page, user signin/signup page.
 - Search, filter and sort.
-- cart handling.
-- user authentication.
+- Cart handling.
+- User authentication.
 
 
 ## Tech Stack
