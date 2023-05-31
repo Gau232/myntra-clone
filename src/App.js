@@ -3,8 +3,6 @@ import "./App.css";
 import AppRouter from "./AppRouter";
 import MyContext from "./context/MyContext";
 import ApiContextProvider from "./context/ApiContextProvider";
-import { Provider } from "react-redux";
-import store from "./redux/store";
 
 
 const App = () => {
@@ -70,13 +68,11 @@ const App = () => {
   };
 
   return (
-    <Provider store={store}>
     <ApiContextProvider>
       <MyContext.Provider value={{ cartState, addToCart, isLoggedin, updateLoginStatus }}>
         <AppRouter />
       </MyContext.Provider>
     </ApiContextProvider>
-    </Provider>
   );
 };
 

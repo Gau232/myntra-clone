@@ -8,7 +8,7 @@
     overflow: hidden;
     display: inline-block;
     box-sizing: border-box;
-    margin: 0 10px 30px;
+    /* margin: 0 10px 30px; */
     background-color: white;
     z-index: 1;
 }
@@ -139,4 +139,36 @@
     bottom: 89px;
     font-size: 1.25rem;
     color: rgb(75, 75, 75);
+}
+
+@media (max-width:550px) {
+    .product-base {
+    width: 162px;
+    border: 1px solid rgba(128, 128, 128, 0.185);
+    }
+
+    .product-brand {
+        font-size: 14px;
+    }
+    
+    .product-product {
+        font-size: 12px;
+    }
+    
+    .product-discountedPrice {
+        font-size: 12px;
+    }
+    
+    .product-strike {
+        font-size: 12px;
+    }
+    
+    .product-discountPercentage {
+        font-size: 10px;
+    }
+    
+    .product-productMetaInfo {
+        margin-top: 0px;
+    }
+
 }

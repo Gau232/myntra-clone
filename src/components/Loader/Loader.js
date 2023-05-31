@@ -1,6 +1,5 @@
 import "./Loader.css";
 import loaderGif1 from "../../assets/images/loader1.gif" 
-import loaderGif2 from "../../assets/images/loader2.gif" 
 
 const Loader = () => {
   return (

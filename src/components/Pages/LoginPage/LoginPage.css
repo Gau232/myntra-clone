@@ -15,7 +15,7 @@
     top: 50%;
     left: 50%;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
     border: 2px solid #ff3e6c66;
     /* box-shadow: 0 0 5px rgba(211, 93, 195); */
     padding: 50px 35px;
@@ -93,7 +93,7 @@
 .loginPage-form a {
     margin-top: 8px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .loginPage-form a:hover {
@@ -102,7 +102,9 @@
 
 
 @media screen and (max-width: 786px) {
-    form {
-        width: 80%;
+    .loginPage-form {
+        padding: 10%;
+        height: 80%;
+        width: 90%;
     }
 }

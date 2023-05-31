@@ -1,10 +1,9 @@
 import "./NavBar.css";
-
 import MyContext from "../../context/MyContext";
-
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/Myntra_Logo_nobg.png";
+import NavSide from "./NavSide";
 import ProductList from "./ProductList";
 import SearchBar from "./SearchBar";
 import { signOut } from "../../FireBaseConfig";
@@ -14,6 +13,7 @@ import {
   HiOutlineUser,
   HiOutlineHeart,
   HiOutlineShoppingBag,
+  HiOutlineMenu,
 } from "react-icons/hi";
 
 const NavBar = () => {
@@ -42,9 +42,7 @@ const NavBar = () => {
   // search bar end
 
   const myContextData = useContext(MyContext);
-  // // console.log(myContextData);
   const [cartCount, setCartCount] = useState(0);
-  // console.log(myContextData.cartState.length);
   useEffect(() => {
     setCartCount(myContextData.cartState.length);
   }, [myContextData]);
@@ -68,11 +66,20 @@ const NavBar = () => {
     // console.log(isLoggedin);
   };
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const menuOpenHandler = () => {
+  setIsMenuOpen(true);
+}
+
   return (
     <>
       <div className="navBar-backSpace"></div>
       <div className="navBar-container">
+      {isMenuOpen && <NavSide  isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
         <div className="navBar-leftSection">
+          <div className="navBar-menu">
+          <HiOutlineMenu onClick={menuOpenHandler}/>
+          </div>
           <div className="navBar-logoHolder">
             <Link to={"/"}>
               <img className="navBar-logo" src={logo} alt="myntra logo" />

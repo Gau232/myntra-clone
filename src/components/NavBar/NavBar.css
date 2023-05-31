@@ -18,6 +18,7 @@
     padding: 0px 40px;
 }
 
+
 /* left section */
 
 .navBar-leftSection {
@@ -26,6 +27,12 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.navBar-menu {
+    display: none;
+    font-size: 1.8rem;
+    opacity: 0.6;
 }
 
 .navBar-logoHolder {
@@ -131,8 +138,8 @@
 }
 
 .navBar-searchListBox {
-    color: inherit; 
-  text-decoration: none; 
+    color: inherit;
+    text-decoration: none;
     position: absolute;
     top: 65px;
     width: 350px;
@@ -168,10 +175,11 @@
     /* justify-content: center; */
     /* align-items: center; */
 }
+
 .navBar-searchList:hover {
     text-decoration: none !important;
     color: #ff3e6c;
-  }
+}
 
 
 .navBar-searchList:hover {
@@ -309,4 +317,48 @@ a {
     border-radius: 50%;
     text-align: center;
     line-height: 18px;
+}
+
+@media screen and (max-width: 1160px) {
+    .navBar-categorySection {
+        display: none;
+    }
+
+    .navBar-container {
+        justify-content: space-between;
+    }
+
+    .NavBar-searchBar {
+        padding: 6px;
+        gap: 5px;
+        width: 40vw;
+    }
+
+    .navBar-menu {
+        display: inline;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    * {
+        font-size: 1em;
+    }
+
+    .navBar-container {
+        height: 60px;
+        padding: 0px 15px;
+    }
+
+    .navBar-categorySection {
+        display: none;
+    }
+
+    .navBar-rightSection {
+        justify-content: left;
+        gap: 15px;
+    }
+
+    .navBar-iconHead {
+        display: none;
+    }
 }

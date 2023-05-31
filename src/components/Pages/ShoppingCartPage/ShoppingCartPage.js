@@ -1,20 +1,15 @@
 import "./ShoppingCartPage.css";
 import NavBar from "../../NavBar/NavBar";
-import { useContext, useEffect, useRef, useState } from "react";
-// import { MyContext } from "../../../App";
+import { useContext, useState } from "react";
 import MyContext from "../../../context/MyContext";
 import { Link,useNavigate } from "react-router-dom";
 import logo from "../../../assets/images/Myntra_Logo_nobg.png";
-import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const ShoppingCartPage = () => {
-  // data initialisation - start
-  // const [myContextData, setMyContextData] = useState(MyContext);
   const myContextData = useContext(MyContext);
-  // console.log(myContextData.cartState);
 
   let dummyData = [
     {
@@ -67,11 +62,6 @@ const ShoppingCartPage = () => {
     },
   ];
   const [cartData, setCartData] = useState(myContextData.cartState);
-  const items = useSelector((state) => state.cart.items);
-// console.log("redux store");
-// console.log(items);
-  // setCartData(items);
-  // cartData = myContextData.cartState;
   console.log(cartData);
   // data initialisation - end
 

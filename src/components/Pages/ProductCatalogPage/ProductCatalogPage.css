@@ -33,6 +33,7 @@ margin-bottom: 0.4rem;
     margin-left: 10px;
     font-weight: 700;
     font-size: 1rem;
+    cursor: pointer;
 }
 
     /* dropdown btn */
@@ -121,7 +122,14 @@ margin-bottom: 0.4rem;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 5vw;
 
 }
 
+
+@media (max-width:750px) {
+    #catalog-cardSection {
+        gap: 2vw;
+        padding: 0px 0;
+    }
+}

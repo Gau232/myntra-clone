@@ -1,6 +1,4 @@
 .footer-container {
-    /* position: relative; */
-    /* bottom: -128px; */
     bottom: 0;
     background-color: rgb(231, 231, 231);
     width: 100%;
@@ -10,11 +8,6 @@
     padding: 10px 50px;
     transition: 0.2s;
 }
-
-/* .footer-container:hover {
-    bottom: 0;
-    transition: 0.2s;
-} */
 
 .footer-individualSections{
     display: flex;
@@ -69,4 +62,21 @@
 .footer-developer div:nth-child(2){
     font-size: 12px;
     opacity: 0.5;
+}
+
+
+@media screen and (max-width:600px){
+    .footer-container {
+        padding: 10px 28px;
+    }
+
+    .footer-individualSections{
+        width: 100px;
+    }
+
+    .footer-developerInfoSection {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+
 }

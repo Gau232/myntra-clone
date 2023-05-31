@@ -1,8 +1,6 @@
-import { json } from "react-router";
 import "./HomePageCards.css";
 import { Link } from "react-router-dom";
-import React, { useContext, useState, useEffect } from "react";
-import { ApiContext } from "../../context/ApiContextProvider";
+import React, { useState, useEffect } from "react";
 import Loader from "../Loader/Loader";
 
 
@@ -84,12 +82,6 @@ const HomePageCards = () => {
     callApi();
   },[]);
 
-
-  // let data1 = useContext(ApiContext).apiData[0];
-  // // console.log(data1);
-  
-
-// !inputData? (<Loader/>) :
 
   return !inputData? (<Loader/>) : (
     <div>

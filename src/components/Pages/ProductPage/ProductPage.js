@@ -1,18 +1,14 @@
 import "./ProductPage.css";
-
 import NavBar from "../../NavBar/NavBar";
-import Footer from "../../Footer/Footer"
+import Footer from "../../Footer/Footer";
 import { HiOutlineHeart, HiOutlineShoppingBag } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import MyContext from "../../../context/MyContext";
-import { addToCart } from "../../../redux/cartSlice";
-import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductPage = () => {
-
   let inputDataMen = require("../../../assets/inputData/mens_data.json");
   let inputDataWomen = require("../../../assets/inputData/womens_data.json");
   let inputDataChildren = require("../../../assets/inputData/children_data.json");
@@ -42,13 +38,9 @@ const ProductPage = () => {
   };
 
   const params = useParams();
-  // // console.log(params);
   productDetails = combinedData.filter((item) => {
     return item.id === params.id;
   });
-  // console.log(productDetails[0]);
-
-  // productDetails = prop ? productDetails : prop;
 
   function ScrollToTopOnMount() {
     useEffect(() => {
@@ -65,14 +57,11 @@ const ProductPage = () => {
     setSelectedItem(index);
     setSelectedSize(size);
   };
-  // // console.log(selectedSize);
   const myContextData = useContext(MyContext);
-  // // console.log(myContextData);
 
   const handleAddToCart = () => {
     if (selectedSize === null) {
-      // alert("Please select a size");
-      toast.info('Please select a size', {
+      toast.info("Please select a size", {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -81,14 +70,12 @@ const ProductPage = () => {
         draggable: true,
         progress: undefined,
         theme: "colored",
-        });
+      });
     } else {
       let cartItem = myContextData.cartState.find(
         (item) => item.id === productDetails[0].id
       );
       if (cartItem) {
-        // console.log("found");
-        // // console.log(cartItem);
         if (cartItem.selected_size === selectedSize) {
           // alert(`Product in size ${selectedSize} already exist in bag`);
           toast.info(`Product in selected size already exist in bag`, {
@@ -100,12 +87,11 @@ const ProductPage = () => {
             draggable: true,
             progress: undefined,
             theme: "colored",
-            });
-          
+          });
         } else {
           addProductToCart();
           // alert(`Item added to bag. Please check your bag.`);
-          toast.success('Item added to bag. Please check your bag', {
+          toast.success("Item added to bag. Please check your bag", {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: false,
@@ -114,12 +100,12 @@ const ProductPage = () => {
             draggable: true,
             progress: undefined,
             theme: "colored",
-            });
+          });
         }
       } else {
         // console.log("! found");
         addProductToCart();
-        toast.success('Item added to bag. Please check your bag', {
+        toast.success("Item added to bag. Please check your bag", {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -128,7 +114,7 @@ const ProductPage = () => {
           draggable: true,
           progress: undefined,
           theme: "colored",
-          });
+        });
       }
     }
   };
@@ -139,21 +125,7 @@ const ProductPage = () => {
     currProductDetails.selected_size = selectedSize;
     console.log(currProductDetails);
     myContextData.addToCart(currProductDetails);
-    // console.log(myContextData);
   }
-
-  const items = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();
-
-  // function handleAddToCart() {
-  //   let currProductDetails = productDetails[0];
-  //   // currProductDetails.quantity = 1;
-  //   const newObject = Object.assign({}, currProductDetails, { quantity: 1 },{ selected_size: selectedSize });
-  //   // currProductDetails.selected_size = selectedSize;
-  //   // console.log(newObject);
-  //   dispatch(addToCart(newObject));
-  //   // console.log(items);
-  // }
 
   return (
     <>
@@ -244,8 +216,8 @@ const ProductPage = () => {
           </div>
         </div>
       </main>
-      <Footer/>
-      <ToastContainer/>
+      <Footer />
+      <ToastContainer />
     </>
   );
 };
