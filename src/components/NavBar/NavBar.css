@@ -86,6 +86,22 @@
     position: relative;
 }
 
+.my-tooltip:hover::after {
+    content: "Coming Soon!";
+    position: absolute;
+    bottom: -10px;
+    left: 10%;
+    border: 1px solid #ff3e6c;
+    background-color: #fff;
+    color: #ff3e6c;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 25px;
+}
+
 .navBar-catNew {
     width: 30px;
     height: 15px;

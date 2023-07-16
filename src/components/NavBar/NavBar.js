@@ -95,9 +95,9 @@ const menuOpenHandler = () => {
             <Link to={"/Catalog/kids"} className="navBar-cat">
               KIDS
             </Link>
-            <span className="navBar-cat">HOME & LIVING</span>
-            <span className="navBar-cat">BEAUTY</span>
-            <span className="navBar-cat navBar-catStudio">
+            <span className="navBar-cat my-tooltip">HOME & LIVING</span>
+            <span className="navBar-cat my-tooltip">BEAUTY</span>
+            <span className="navBar-cat navBar-catStudio my-tooltip">
               STUDIO <div className="navBar-catNew">NEW</div>
             </span>
           </div>
